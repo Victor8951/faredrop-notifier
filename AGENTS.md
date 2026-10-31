@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Auth only via Lovable Cloud built-in users; no custom tables (app data will live elsewhere later).
+- Signed-in pages live under `src/routes/_authenticated/` (client-only gate redirecting to `/signin`), so protection stays in one place.
