@@ -51,3 +51,12 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+## Stack & deployment
+
+Plain **Vite + React** single-page app — no server-side rendering.
+
+- Routing: [React Router](https://reactrouter.com) (client-side), defined in `src/router.tsx` — `/`, `/signin`, `/signup` (`/sign-in` and `/sign-up` redirect there), and `/app` behind a client-only auth gate.
+- Auth: Supabase via `src/integrations/supabase/client.ts` (reads `VITE_SUPABASE_URL` / `VITE_SUPABASE_PUBLISHABLE_KEY`).
+- Build: `npm run build` → static files in `dist/`.
+- Hosting: Vercel, configured by `vercel.json` (Vite preset, `dist/` output, and a rewrite to `index.html` so deep links like `/app` resolve client-side).
