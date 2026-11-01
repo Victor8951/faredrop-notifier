@@ -10,5 +10,5 @@
 <!-- LOVABLE:END -->
 
 ## Project rules
-- Auth only via Lovable Cloud built-in users; no custom tables (app data will live elsewhere later).
+- Auth only via Supabase Auth built-in users in our own Supabase project (`jjljjaahrdcfbwtiuufq`); no custom tables (app data will live elsewhere later).
 - Signed-in pages live under `src/routes/_authenticated/` (client-only gate redirecting to `/signin`), so protection stays in one place.
