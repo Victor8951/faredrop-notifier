@@ -6,6 +6,7 @@
 
 @theme inline {
   --font-sans: "Inter", "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", "Noto Serif TC", ui-serif, Georgia, serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -33,31 +34,43 @@
   --color-ring: var(--ring);
 }
 
+/* "Oil portrait" theme — palette sampled from a painted Maine Coon on a cream,
+   brush-textured canvas: primed-canvas cream, umber tabby stripes, taupe/grey
+   fur, a terracotta nose and caramel undercoat. */
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.13 0.012 285);
-  --foreground: oklch(0.97 0.005 285);
-  --card: oklch(0.17 0.016 285);
-  --card-foreground: oklch(0.97 0.005 285);
-  --popover: oklch(0.17 0.016 285);
-  --popover-foreground: oklch(0.97 0.005 285);
-  --primary: oklch(0.62 0.22 293);
-  --primary-glow: oklch(0.72 0.18 305);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.22 0.02 285);
-  --secondary-foreground: oklch(0.95 0.005 285);
-  --muted: oklch(0.22 0.02 285);
-  --muted-foreground: oklch(0.7 0.02 285);
-  --accent: oklch(0.25 0.04 293);
-  --accent-foreground: oklch(0.97 0.005 285);
-  --destructive: oklch(0.65 0.2 25);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(1 0 0 / 9%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.62 0.22 293);
+  --background: oklch(0.94 0.014 80); /* primed canvas */
+  --foreground: oklch(0.27 0.02 55); /* umber stripes */
+  --card: oklch(0.97 0.009 82); /* white chest fur */
+  --card-foreground: oklch(0.27 0.02 55);
+  --popover: oklch(0.97 0.009 82);
+  --popover-foreground: oklch(0.27 0.02 55);
+  --primary: oklch(0.54 0.1 40); /* terracotta nose */
+  --primary-glow: oklch(0.52 0.08 58); /* caramel undercoat */
+  --primary-foreground: oklch(0.98 0.008 85);
+  --secondary: oklch(0.88 0.02 72); /* soft taupe */
+  --secondary-foreground: oklch(0.27 0.02 55);
+  --muted: oklch(0.89 0.018 75);
+  --muted-foreground: oklch(0.5 0.022 60); /* grey-brown fur */
+  --accent: oklch(0.89 0.03 62); /* inner-ear peach */
+  --accent-foreground: oklch(0.27 0.02 55);
+  --destructive: oklch(0.52 0.17 28);
+  --destructive-foreground: oklch(0.98 0.008 85);
+  --border: oklch(0.32 0.025 55 / 14%);
+  --input: oklch(0.32 0.025 55 / 22%);
+  --ring: oklch(0.54 0.1 40);
   --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-glow));
-  --gradient-hero: radial-gradient(ellipse 70% 50% at 50% 0%, oklch(0.62 0.22 293 / 28%), transparent 70%);
-  --shadow-glow: 0 10px 40px -10px oklch(0.62 0.22 293 / 55%);
+  /* Warm window light falling on the canvas, with a hint of taupe in the shadows. */
+  --gradient-hero:
+    radial-gradient(ellipse 65% 60% at 50% 0%, oklch(0.99 0.012 85 / 80%), transparent 75%),
+    radial-gradient(ellipse 35% 40% at 12% 35%, oklch(0.62 0.07 45 / 7%), transparent 75%),
+    radial-gradient(ellipse 35% 40% at 88% 40%, oklch(0.75 0.04 65 / 12%), transparent 75%);
+  --shadow-glow: 0 12px 30px -14px oklch(0.4 0.06 45 / 45%);
+  /* Fine canvas grain + irregular vertical brushstrokes (noise stretched along y),
+     like the painting's background. */
+  --canvas-texture:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.28 0 0 0 0 0.2 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35 0.006' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.98 0 0 0 0 0.94 0 0 0 0.9 -0.42'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
 }
 
 @layer base {
@@ -65,10 +78,17 @@
   html { scroll-behavior: smooth; }
   body {
     background-color: var(--color-background);
+    background-image: var(--canvas-texture);
+    background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+  }
+  ::selection { background: oklch(0.54 0.1 40 / 25%); }
 }
 
 @utility bg-hero { background-image: var(--gradient-hero); }
